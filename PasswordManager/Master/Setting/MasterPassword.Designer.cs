@@ -50,6 +50,7 @@
             this.SignIn.Size = new System.Drawing.Size(75, 23);
             this.SignIn.TabIndex = 1;
             this.SignIn.UseVisualStyleBackColor = true;
+            this.SignIn.Click += new System.EventHandler(this.SignIn_Click);
             // 
             // Change
             // 
@@ -59,6 +60,7 @@
             this.Change.TabIndex = 2;
             this.Change.Text = "変更";
             this.Change.UseVisualStyleBackColor = true;
+            this.Change.Click += new System.EventHandler(this.Change_Click);
             // 
             // MasterPassword
             // 

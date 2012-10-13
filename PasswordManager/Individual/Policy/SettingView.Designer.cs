@@ -28,10 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.Save = new System.Windows.Forms.Button();
             this.charset1 = new PasswordManager.Individual.Policy.Charset();
             this.length1 = new PasswordManager.Individual.Policy.Length();
             this.validLimit1 = new PasswordManager.Individual.Policy.ValidLimit();
             this.SuspendLayout();
+            // 
+            // Save
+            // 
+            this.Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Save.Location = new System.Drawing.Point(364, 276);
+            this.Save.Name = "Save";
+            this.Save.Size = new System.Drawing.Size(75, 23);
+            this.Save.TabIndex = 3;
+            this.Save.Text = "Save";
+            this.Save.UseVisualStyleBackColor = true;
             // 
             // charset1
             // 
@@ -40,7 +51,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.charset1.Location = new System.Drawing.Point(3, 68);
             this.charset1.Name = "charset1";
-            this.charset1.Size = new System.Drawing.Size(436, 231);
+            this.charset1.Size = new System.Drawing.Size(436, 202);
             this.charset1.TabIndex = 2;
             // 
             // length1
@@ -61,6 +72,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.Save);
             this.Controls.Add(this.charset1);
             this.Controls.Add(this.length1);
             this.Controls.Add(this.validLimit1);
@@ -75,6 +87,7 @@
         private ValidLimit validLimit1;
         private Length length1;
         private Charset charset1;
+        private System.Windows.Forms.Button Save;
 
     }
 }

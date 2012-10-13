@@ -19,15 +19,9 @@ namespace PasswordManager.Master
 
             this.Shown += (o, e) =>
             {
-                var conf = MasterConf.SingletonObject;
-                Text = conf.Name;
-                Name = conf.Name;
-                settingView.HideFore = conf.HideFore;
-                settingView.HideBack = conf.HideBack;
-                settingView.ShowFore = conf.ShowFore;
-                settingView.ShowBack = conf.ShowBack;
-                settingView.DataFolder = conf.DatFolder;
-                settingView.Remarks = conf.Remarks;
+                Text = this.name;
+                Name = this.name;
+                settingView.Config = this;
             };
         }
     }

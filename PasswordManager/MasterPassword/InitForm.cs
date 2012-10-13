@@ -20,9 +20,14 @@ namespace PasswordManager.MasterPassword
             {
                 isAsAddNew = value;
                 ViewName.ReadOnly = ! value;
+                selectRoot.Enabled = value;
             }
         }
-        public string ConfName { get { return ViewName.Text; } }
+        public string ConfName
+        {
+            get { return ViewName.Text; }
+            set { ViewName.Text = value; }
+        }
         public string Password { get { return InputPassword.Text; } }
         public string ConfDir { get { return rootFolderDialog.SelectedPath; } }
 

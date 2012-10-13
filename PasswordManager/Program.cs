@@ -28,12 +28,15 @@ args = new[] { @"D:\Bk_Yoshi\Vs\PasswordManager\PasswordManager\bin\Debug\test.y
                     var result = initForm.ShowDialog();
                     if (result == DialogResult.OK)
                     {
-                        MasterConf.CreateNewConf(
-                            initForm.ConfName,
-                            initForm.ConfDir,
-                            PasswordFactory.ToHash(initForm.Password));
+                        using (var main = new MainConfig())
+                        {
+                            main.CreateNewConf(
+                                initForm.ConfName,
+                                initForm.ConfDir,
+                                initForm.Password);
 
-                        Application.Run(new MainConfig());
+                            Application.Run(main);
+                        }
                     }
                 }
             }
@@ -41,8 +44,11 @@ args = new[] { @"D:\Bk_Yoshi\Vs\PasswordManager\PasswordManager\bin\Debug\test.y
             {
                 if (System.IO.File.Exists(args[0]))
                 {
-                    MasterConf.ReadFromFile(args[0]);
-                    Application.Run(new MainConfig());
+                    using (var main = new MainConfig())
+                    {
+                        main.ReadFromFile(args[0]);
+                        Application.Run(main);
+                    }
                 }
                 else
                 {

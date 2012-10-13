@@ -139,7 +139,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.individualList.Location = new System.Drawing.Point(0, 3);
             this.individualList.Name = "individualList";
-            this.individualList.Size = new System.Drawing.Size(284, 203);
+            this.individualList.Size = new System.Drawing.Size(284, 247);
             this.individualList.TabIndex = 0;
             // 
             // tabPage2
@@ -158,6 +158,7 @@
             this.settingView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.settingView.DataFolder = "";
             this.settingView.HideBack = System.Drawing.SystemColors.Control;
             this.settingView.HideFore = System.Drawing.SystemColors.WindowText;
             this.settingView.Location = new System.Drawing.Point(0, 0);

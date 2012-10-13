@@ -3,25 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PasswordManager.Model
+namespace PasswordManager.Master
 {
     using System.Drawing;
     using System.IO;
+    using PasswordManager.Model;
 
-    class MasterConf
+    public partial class MainConfig : IMainConfig
     {
         public static readonly Color DEFAULT_HIDE_FORE = Color.FromArgb(255, 32, 0, 0);
         public static readonly Color DEFAULT_HIDE_BACK = Color.FromArgb(255, 16, 0, 0);
         public static readonly Color DEFAULT_SHOW_FORE = Color.Black;
         public static readonly Color DEFAULT_SHOW_BACK = Color.White;
 
-        public static MasterConf SingletonObject;
+        public event Action PasswordConfirmed = new Action(() => { });
 
-        private readonly string name;
-        private readonly string confFolderPath;
-        private readonly byte[] hashedPass;
+        private string name;
+        private string confFolderPath;
 
-        public string Name { get { return name; } }
+        private string password;
+        private byte[] hashedPass;
+
+        public string ConfName { get { return name; } }
         public Color HideFore { set; get; }
         public Color HideBack { set; get; }
         public Color ShowFore { set; get; }
@@ -29,18 +32,32 @@ namespace PasswordManager.Model
         public string DatFolder { set; get; }
         public string Remarks { set; get; }
 
-        private MasterConf(string name, string confFolderPath, byte[] hashedPass)
+        public byte[] HashedPass
         {
-            this.name = name;
-            this.confFolderPath = confFolderPath;
-            this.hashedPass = hashedPass;
-            this.HideFore = DEFAULT_HIDE_FORE;
-            this.HideBack = DEFAULT_HIDE_BACK;
-            this.ShowFore = DEFAULT_SHOW_FORE;
-            this.ShowBack = DEFAULT_SHOW_BACK;
-            this.DatFolder = confFolderPath + "\\YPass";
-            this.Remarks = string.Empty;
+            set
+            {
+                hashedPass = value;
+                password = null;
+                IsPasswordConfirmed = false;
+            }
+            get { return hashedPass; }
         }
+        public string Password
+        {
+            set
+            {
+                password = value;
+                hashedPass = PasswordFactory.ToHash(value);
+                IsPasswordConfirmed = true;
+
+                PasswordConfirmed();
+            }
+            get
+            {
+                return password;
+            }
+        }
+        public bool IsPasswordConfirmed { private set; get; }
 
         public void SaveToFile()
         {
@@ -50,7 +67,7 @@ namespace PasswordManager.Model
                 os.WriteByte(0);
                 WriteUtf8Bytes(os, Remarks);
                 os.WriteByte(0);
-                os.Write(hashedPass, 0, hashedPass.Length);
+                os.Write(HashedPass, 0, HashedPass.Length);
                 WriteColor(os, HideFore);
                 WriteColor(os, HideBack);
                 WriteColor(os, ShowFore);
@@ -70,7 +87,7 @@ namespace PasswordManager.Model
             stream.WriteByte(color.B);
         }
 
-        public static void ReadFromFile(string path)
+        public void ReadFromFile(string path)
         {
             FileInfo file = new FileInfo(path);
             string fileName = file.Name;
@@ -83,20 +100,21 @@ namespace PasswordManager.Model
                 string Remarks = ReadString(input); ;
                 byte[] hashedPass = new byte[64];
                 input.Read(hashedPass, 0, 64);
-                
+
                 Color hideFore = ReadColor(input);
                 Color hideBack = ReadColor(input);
                 Color showFore = ReadColor(input);
                 Color showBack = ReadColor(input);
 
-                SingletonObject = new MasterConf(name, confFolderPath, hashedPass)
-                {
-                    HideFore = hideFore,
-                    HideBack = hideBack,
-                    ShowFore = showFore,
-                    ShowBack = showBack,
-                    Remarks = Remarks,
-                };
+                this.DatFolder = DatFolder;
+                this.name = name;
+                this.confFolderPath = confFolderPath;
+                this.HashedPass = hashedPass;
+                this.HideFore = hideFore;
+                this.HideBack = hideBack;
+                this.ShowFore = showFore;
+                this.ShowBack = showBack;
+                this.Remarks = Remarks;
             }
         }
         private static string ReadString(FileStream stream)
@@ -119,10 +137,12 @@ namespace PasswordManager.Model
             return Color.FromArgb(buffer[0], buffer[1], buffer[2], buffer[3]);
         }
 
-        internal static void CreateNewConf(string name, string confFolderPath, byte[] hashedPass)
+        internal void CreateNewConf(string name, string confFolderPath, string password)
         {
-            SingletonObject = new MasterConf(name, confFolderPath, hashedPass);
-            SingletonObject.SaveToFile();
+            this.name = name;
+            this.confFolderPath = confFolderPath;
+            this.Password = password;
+            this.SaveToFile();
         }
     }
 }

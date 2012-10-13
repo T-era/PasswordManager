@@ -31,10 +31,10 @@
             this.Remarks = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.targetSite1 = new PasswordManager.Individual.TargetSite();
             this.secretView1 = new PasswordManager.Individual.Alter.SecretView();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.settingView1 = new PasswordManager.Individual.Policy.SettingView();
+            this.targetSite1 = new PasswordManager.Individual.TargetSite();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -63,7 +63,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 106);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(480, 304);
+            this.tabControl1.Size = new System.Drawing.Size(480, 294);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -77,24 +77,6 @@
             this.tabPage1.Text = "パスワード";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.settingView1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(472, 278);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "ポリシー";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // targetSite1
-            // 
-            this.targetSite1.Location = new System.Drawing.Point(12, 8);
-            this.targetSite1.Name = "targetSite1";
-            this.targetSite1.Size = new System.Drawing.Size(364, 24);
-            this.targetSite1.TabIndex = 3;
-            // 
             // secretView1
             // 
             this.secretView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -105,6 +87,17 @@
             this.secretView1.Size = new System.Drawing.Size(476, 278);
             this.secretView1.TabIndex = 0;
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.settingView1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(472, 268);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "ポリシー";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // settingView1
             // 
             this.settingView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -112,8 +105,15 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.settingView1.Location = new System.Drawing.Point(0, 0);
             this.settingView1.Name = "settingView1";
-            this.settingView1.Size = new System.Drawing.Size(472, 275);
+            this.settingView1.Size = new System.Drawing.Size(472, 262);
             this.settingView1.TabIndex = 0;
+            // 
+            // targetSite1
+            // 
+            this.targetSite1.Location = new System.Drawing.Point(12, 8);
+            this.targetSite1.Name = "targetSite1";
+            this.targetSite1.Size = new System.Drawing.Size(364, 24);
+            this.targetSite1.TabIndex = 3;
             // 
             // IndividualWindow
             // 
