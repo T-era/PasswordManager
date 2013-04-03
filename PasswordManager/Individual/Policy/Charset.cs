@@ -35,7 +35,7 @@ namespace PasswordManager.Individual.Policy
             var gcbiNumber = new GroupedCheckBoxItem<string>("数字", new string[] { }) { Replacer = "0 ～ 9" };
             gcbiNumber.ParentCheckBoxChanged += (b) => { item.AllowNumber = b; };
             alphabetGroup = new GroupedCheckBoxItem<string>("英字", new[] { "小文字", "大文字" });
-            alphabetGroup.ParentCheckBoxChanged += (b) => { item.AllowNumber = b; };
+            alphabetGroup.ParentCheckBoxChanged += (b) => { item.AllowAlphabet = b; };
             alphabetGroup.ChildCheckBoxChanged += (i, b) =>
             {
                 char[] charset;
