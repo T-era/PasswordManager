@@ -65,6 +65,7 @@
             this.To.Name = "To";
             this.To.Size = new System.Drawing.Size(45, 19);
             this.To.TabIndex = 2;
+            this.To.ValueChanged += new System.EventHandler(this.To_ValueChanged);
             // 
             // From
             // 
@@ -72,6 +73,7 @@
             this.From.Name = "From";
             this.From.Size = new System.Drawing.Size(45, 19);
             this.From.TabIndex = 3;
+            this.From.ValueChanged += new System.EventHandler(this.From_ValueChanged);
             // 
             // label1
             // 

@@ -49,11 +49,15 @@ namespace PasswordManager.Master.Setting
 
         private void Change_Click(object sender, EventArgs e)
         {
-            if (! Config.IsPasswordConfirmed)
+            ChangePassword(this.Config);
+        }
+        internal static void ChangePassword(IMainConfig config)
+        {
+            if (!config.IsPasswordConfirmed)
             {
                 using (var signIn = new SignIn())
                 {
-                    signIn.Config = this.Config;
+                    signIn.Config = config;
                     signIn.ShowDialog();
                     if (signIn.DialogResult != DialogResult.OK)
                     {
@@ -62,15 +66,24 @@ namespace PasswordManager.Master.Setting
                     }
                 }
             }
-            using (var changePassword = new InitForm() {
+            using (var changePassword = new InitForm()
+            {
                 IsAsAddNew = false,
-                ConfName = Config.ConfName,
+                ConfName = config.ConfName,
             })
             {
                 changePassword.ShowDialog();
                 if (changePassword.DialogResult == DialogResult.OK)
                 {
-                    Config.Password = changePassword.Password;
+                    string newPassword = changePassword.Password;
+                    string oldPassword = config.Password;
+                    foreach (ItemPolicy item in config.Items)
+                    {
+                        item.ResavePassword(oldPassword, newPassword, config.DatFolder);
+                    }
+                    config.Password = newPassword;
+                    config.DatFolder = config.DatFolder;
+                    config.SaveToFile();
                 }
             }
         }

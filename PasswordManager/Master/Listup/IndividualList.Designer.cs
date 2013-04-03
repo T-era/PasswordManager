@@ -30,35 +30,64 @@
         {
             this.components = new System.ComponentModel.Container();
             this.ListView = new System.Windows.Forms.DataGridView();
-            this.AddNew = new System.Windows.Forms.Button();
-            this.backend = new PasswordManager.Master.Listup.Backend();
-            this.backendBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.limitDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pathDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.backendBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.backend = new PasswordManager.Master.Listup.Backend();
+            this.AddNew = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ListView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.backend)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backendBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.backend)).BeginInit();
             this.SuspendLayout();
             // 
             // ListView
             // 
-            this.ListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ListView.AllowUserToAddRows = false;
+            this.ListView.AllowUserToDeleteRows = false;
+            this.ListView.AllowUserToOrderColumns = true;
+            this.ListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ListView.AutoGenerateColumns = false;
             this.ListView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ListView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nameDataGridViewTextBoxColumn,
-            this.limitDataGridViewTextBoxColumn,
-            this.pathDataGridViewTextBoxColumn});
+            this.limitDataGridViewTextBoxColumn});
             this.ListView.DataMember = "ListItems";
             this.ListView.DataSource = this.backendBindingSource;
             this.ListView.Location = new System.Drawing.Point(0, 0);
             this.ListView.Name = "ListView";
+            this.ListView.ReadOnly = true;
             this.ListView.RowTemplate.Height = 21;
+            this.ListView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ListView.Size = new System.Drawing.Size(226, 135);
             this.ListView.TabIndex = 0;
+            this.ListView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ListViewShowAlert);
+            this.ListView.DoubleClick += new System.EventHandler(this.ListView_DoubleClick);
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "名前";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // limitDataGridViewTextBoxColumn
+            // 
+            this.limitDataGridViewTextBoxColumn.DataPropertyName = "Limit";
+            this.limitDataGridViewTextBoxColumn.HeaderText = "期限";
+            this.limitDataGridViewTextBoxColumn.Name = "limitDataGridViewTextBoxColumn";
+            this.limitDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // backendBindingSource
+            // 
+            this.backendBindingSource.DataSource = this.backend;
+            this.backendBindingSource.Position = 0;
+            // 
+            // backend
+            // 
+            this.backend.DataSetName = "Backend";
+            this.backend.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // AddNew
             // 
@@ -69,34 +98,7 @@
             this.AddNew.TabIndex = 1;
             this.AddNew.Text = "追加";
             this.AddNew.UseVisualStyleBackColor = true;
-            // 
-            // backend
-            // 
-            this.backend.DataSetName = "Backend";
-            this.backend.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // backendBindingSource
-            // 
-            this.backendBindingSource.DataSource = this.backend;
-            this.backendBindingSource.Position = 0;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "名前";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            // 
-            // limitDataGridViewTextBoxColumn
-            // 
-            this.limitDataGridViewTextBoxColumn.DataPropertyName = "Limit";
-            this.limitDataGridViewTextBoxColumn.HeaderText = "期限";
-            this.limitDataGridViewTextBoxColumn.Name = "limitDataGridViewTextBoxColumn";
-            // 
-            // pathDataGridViewTextBoxColumn
-            // 
-            this.pathDataGridViewTextBoxColumn.DataPropertyName = "Path";
-            this.pathDataGridViewTextBoxColumn.HeaderText = "パス";
-            this.pathDataGridViewTextBoxColumn.Name = "pathDataGridViewTextBoxColumn";
+            this.AddNew.Click += new System.EventHandler(this.AddNew_Click);
             // 
             // IndividualList
             // 
@@ -107,8 +109,8 @@
             this.Name = "IndividualList";
             this.Size = new System.Drawing.Size(226, 167);
             ((System.ComponentModel.ISupportInitialize)(this.ListView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.backend)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.backendBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.backend)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -121,6 +123,5 @@
         private Backend backend;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn limitDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pathDataGridViewTextBoxColumn;
     }
 }

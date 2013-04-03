@@ -25,7 +25,7 @@ namespace PasswordManager.GuiParts.Utility
             InitializeComponent();
         }
 
-        public void Init(IList<GroupedCheckBoxItem> list)
+        public void Init(IList<IGroupedCheckBoxItem> list)
         {
             for (int i = 0; i < list.Count; i++)
             {
@@ -74,7 +74,10 @@ namespace PasswordManager.GuiParts.Utility
                         }
                     }
 
-                    panel2.Controls.Add(item.Childs[0]);
+                    foreach (var c in item.Childs)
+                    {
+                        panel2.Controls.Add(c);
+                    }
                 };
                 checkBox.GotFocus += action;
                 label.GotFocus += action;
@@ -84,24 +87,45 @@ namespace PasswordManager.GuiParts.Utility
             }
         }
     }
-    public class GroupedCheckBoxItem
+    public interface IGroupedCheckBoxItem
+    {
+        string ParentLabel { get; }
+        CheckBox Parent { get; }
+        IList<CheckBox> Childs { get; }
+        string Replacer { set; get; }
+        event Action<object, bool> ChildCheckBoxChanged;
+        event Action<bool> ParentCheckBoxChanged;
+    }
+    public class GroupedCheckBoxItem<T> : IGroupedCheckBoxItem
     {
         public string ParentLabel { private set; get; }
         public CheckBox Parent { private set; get; }
         public IList<CheckBox> Childs { private set; get; }
         public string Replacer { set; get; }
+        public event Action<object, bool> ChildCheckBoxChanged;
+        public event Action<bool> ParentCheckBoxChanged;
 
-        public GroupedCheckBoxItem(string parentLabel, IList<string> childs)
+        private IDictionary<T, CheckBox> checkBoxItem;
+
+        public GroupedCheckBoxItem(string parentLabel, IList<T> childs)
         {
             ParentLabel = parentLabel;
 
             Childs = new List<CheckBox>();
-            foreach (string cLabel in childs)
+            checkBoxItem = new Dictionary<T, CheckBox>();
+            foreach (T cLabel in childs)
             {
-                Childs.Add(new CheckBox() {
-                    Text = cLabel,
+                T tempLabel = cLabel;
+                string label = (cLabel is string) ? cLabel as string : cLabel.ToString();
+                var childCheckBox = new CheckBox() {
+                    Text = label,
                     Checked = true,
-                });
+                };
+                childCheckBox.CheckedChanged += (o, e) => {
+                    ChildCheckBoxChanged(tempLabel, childCheckBox.Checked);
+                };
+                Childs.Add(childCheckBox);
+                checkBoxItem.Add(cLabel, childCheckBox);
             }
             Parent = new CheckBox()
             {
@@ -113,7 +137,12 @@ namespace PasswordManager.GuiParts.Utility
                 {
                     cb.Enabled = Parent.Checked;
                 }
+                ParentCheckBoxChanged(Parent.Checked);
             };
+        }
+        public CheckBox GetCheckBoxItem(T key)
+        {
+            return checkBoxItem[key];
         }
     }
 }

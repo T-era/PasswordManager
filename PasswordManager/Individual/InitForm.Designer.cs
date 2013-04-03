@@ -77,10 +77,8 @@
             // 
             this.InputType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.InputType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.InputType.FormattingEnabled = true;
-            this.InputType.Items.AddRange(new object[] {
-            "URL",
-            "その他"});
             this.InputType.Location = new System.Drawing.Point(309, 37);
             this.InputType.Name = "InputType";
             this.InputType.Size = new System.Drawing.Size(68, 20);
@@ -89,6 +87,7 @@
             // OK
             // 
             this.OK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.OK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.OK.Location = new System.Drawing.Point(221, 63);
             this.OK.Name = "OK";
             this.OK.Size = new System.Drawing.Size(75, 23);

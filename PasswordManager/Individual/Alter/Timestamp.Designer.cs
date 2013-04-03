@@ -49,7 +49,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 1;
-            this.label1.Text = "設定日時";
+            this.label1.Text = "警告期限";
             // 
             // Timestamp
             // 

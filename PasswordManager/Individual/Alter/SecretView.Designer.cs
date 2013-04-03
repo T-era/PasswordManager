@@ -37,10 +37,14 @@
             // 
             this.password1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.password1.HideBack = System.Drawing.Color.Empty;
+            this.password1.HideFore = System.Drawing.Color.Empty;
             this.password1.Location = new System.Drawing.Point(3, 3);
             this.password1.Name = "password1";
             this.password1.Size = new System.Drawing.Size(316, 21);
             this.password1.TabIndex = 0;
+            this.password1.ViewBack = System.Drawing.Color.Empty;
+            this.password1.ViewFore = System.Drawing.Color.Empty;
             // 
             // timestamp1
             // 
@@ -60,6 +64,7 @@
             this.Generate.TabIndex = 2;
             this.Generate.Text = "生成";
             this.Generate.UseVisualStyleBackColor = true;
+            this.Generate.Click += new System.EventHandler(this.Generate_Click);
             // 
             // SecretView
             // 

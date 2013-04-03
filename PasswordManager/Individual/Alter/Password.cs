@@ -9,8 +9,19 @@ using System.Windows.Forms;
 
 namespace PasswordManager.Individual.Alter
 {
+    using PasswordManager.Model;
+
     public partial class Password : UserControl
     {
+        private Binding passwordBinding;
+        public ItemPolicy Item
+        {
+            set {
+                passwordBinding = new Binding("Text", value, "Password");
+                View.DataBindings.Add(passwordBinding);
+            }
+        }
+
         public Color HideFore { set; get; }
         public Color HideBack { set; get; }
         public Color ViewFore { set; get; }

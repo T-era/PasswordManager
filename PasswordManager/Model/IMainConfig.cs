@@ -5,11 +5,16 @@ using System.Text;
 
 namespace PasswordManager.Model
 {
+    using System.ComponentModel;
     using System.Drawing;
+    using System.Windows.Forms;
 
-    public interface IMainConfig
+    using PasswordManager.Master.Listup;
+
+    public interface IMainConfig : INotifyPropertyChanged
     {
         event Action PasswordConfirmed;
+        event Action ItemModified;
 
         string ConfName { get; }
         Color HideFore { set; get; }
@@ -23,6 +28,10 @@ namespace PasswordManager.Model
         bool IsPasswordConfirmed { get; }
         string Password { set; get; }
 
+        void AddItem(ItemPolicy item);
+        IEnumerator<ItemPolicy> GetItems();
+        BindingSource Items { get; }
         void SaveToFile();
+        byte[] GetSalt();
     }
 }

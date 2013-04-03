@@ -68,11 +68,8 @@
             "週",
             "月",
             "年"});
+            this.Unit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Unit.FormattingEnabled = true;
-            this.Unit.Items.AddRange(new object[] {
-            "週",
-            "月",
-            "年"});
             this.Unit.Location = new System.Drawing.Point(113, 2);
             this.Unit.Name = "Unit";
             this.Unit.Size = new System.Drawing.Size(58, 20);

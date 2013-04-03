@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.Change = new System.Windows.Forms.Button();
-            this.switchView1 = new PasswordManager.GuiParts.Utility.SwitchView();
+            this.targetLink = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // Change
@@ -41,29 +41,35 @@
             this.Change.TabIndex = 1;
             this.Change.Text = "変更";
             this.Change.UseVisualStyleBackColor = true;
+            this.Change.Click += new System.EventHandler(this.Change_Click);
             // 
-            // switchView1
+            // targetLink
             // 
-            this.switchView1.Location = new System.Drawing.Point(0, 0);
-            this.switchView1.Name = "switchView1";
-            this.switchView1.Size = new System.Drawing.Size(281, 23);
-            this.switchView1.TabIndex = 0;
+            this.targetLink.AutoSize = true;
+            this.targetLink.Location = new System.Drawing.Point(3, 5);
+            this.targetLink.Name = "targetLink";
+            this.targetLink.Size = new System.Drawing.Size(56, 12);
+            this.targetLink.TabIndex = 2;
+            this.targetLink.TabStop = true;
+            this.targetLink.Text = "linkLabel1";
+            this.targetLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.targetLink_LinkClicked);
             // 
             // TargetSite
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.targetLink);
             this.Controls.Add(this.Change);
-            this.Controls.Add(this.switchView1);
             this.Name = "TargetSite";
             this.Size = new System.Drawing.Size(330, 24);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Button Change;
-        public GuiParts.Utility.SwitchView switchView1;
+        private System.Windows.Forms.LinkLabel targetLink;
     }
 }

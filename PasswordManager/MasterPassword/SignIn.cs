@@ -22,7 +22,7 @@ namespace PasswordManager.MasterPassword
 
         private void OK_Click(object sender, EventArgs e)
         {
-            byte[] inputHash = PasswordFactory.ToHash(Input.Text);
+            byte[] inputHash = PasswordFactory.ToHash(Input.Text, Config);
             if (inputHash.SequenceEqual(Config.HashedPass))
             {
                 Config.Password = Input.Text;

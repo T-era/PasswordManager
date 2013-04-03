@@ -5,6 +5,8 @@ using System.Windows.Forms;
 
 namespace PasswordManager
 {
+    using System.IO;
+
     using PasswordManager.MasterPassword;
     using PasswordManager.Master;
     using PasswordManager.Model;
@@ -17,43 +19,44 @@ namespace PasswordManager
         [STAThread]
         static void Main(string[] args)
         {
-args = new[] { @"D:\Bk_Yoshi\Vs\PasswordManager\PasswordManager\bin\Debug\test.ytel" };
+//args = new[] { @"C:\Users\22677478\Desktop\個人.ytel" };
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            if (args.Length < 1 || string.IsNullOrEmpty(args[0]))
+            using (var main = new MainConfig())
             {
-                using (var initForm = new InitForm())
+                if (args.Length < 1 || string.IsNullOrEmpty(args[0]))
                 {
-                    var result = initForm.ShowDialog();
-                    if (result == DialogResult.OK)
+                    using (var initForm = new InitForm())
                     {
-                        using (var main = new MainConfig())
+                        var result = initForm.ShowDialog();
+                        if (result == DialogResult.OK)
                         {
                             main.CreateNewConf(
                                 initForm.ConfName,
                                 initForm.ConfDir,
-                                initForm.Password);
-
-                            Application.Run(main);
+                                initForm.Password,
+                                initForm.DataDir);
                         }
-                    }
-                }
-            }
-            else
-            {
-                if (System.IO.File.Exists(args[0]))
-                {
-                    using (var main = new MainConfig())
-                    {
-                        main.ReadFromFile(args[0]);
-                        Application.Run(main);
+                        else
+                        {
+                            return;
+                        }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("TODO:USAGE");
+                    if (File.Exists(args[0]))
+                    {
+                        main.ReadFromFile(args[0]);
+                    }
+                    else
+                    {
+                        MessageBox.Show("引数は任意。(指定する場合はマスタパスの設定ファイル");
+                        return;
+                    }
                 }
+                Application.Run(main);
             }
         }
     }
