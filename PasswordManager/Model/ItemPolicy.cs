@@ -38,7 +38,6 @@ namespace PasswordManager.Model
             }
         }
         private readonly string name;
-        private IList<char> usableChars;
         private string password;
 
         private string location;
@@ -207,13 +206,21 @@ namespace PasswordManager.Model
 
         public string Password { get { return password; } }
 
-        internal IList<char> UsableChars { get { return usableChars; } }
-
-        public IEnumerator<char> GetUsableChars()
+        /// <summary>
+        /// このフィールドは、個別のチェックボックスと連動。
+        /// </summary>
+        private IList<char> usableChars;
+        /// <summary>
+        /// このプロパティはグループ別のまとめ指定も反映。
+        /// </summary>
+        internal IList<char> UsableChars
         {
-            foreach (char c in usableChars)
-            {
-                yield return c;
+            get {
+                return usableChars
+                    .Where(t => AllowAlphabet || (! CHARS_LOWER.Contains(t) && ! CHARS_UPPER.Contains(t)))
+                    .Where(t => AllowNumber || !CHARS_NUMBERS.Contains(t))
+                    .Where(t => AllowSign || !CHARS_SIGNS.Contains(t))
+                    .ToList();
             }
         }
 
