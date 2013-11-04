@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.Label = new System.Windows.Forms.Label();
-            this.SignIn = new System.Windows.Forms.Button();
             this.Change = new System.Windows.Forms.Button();
+            this.SignInButton = new PasswordManager.GuiParts.LogonManageButton();
             this.SuspendLayout();
             // 
             // Label
@@ -42,16 +42,6 @@
             this.Label.TabIndex = 0;
             this.Label.Text = "マスターパス";
             // 
-            // SignIn
-            // 
-            this.SignIn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.SignIn.Location = new System.Drawing.Point(75, 0);
-            this.SignIn.Name = "SignIn";
-            this.SignIn.Size = new System.Drawing.Size(75, 23);
-            this.SignIn.TabIndex = 1;
-            this.SignIn.UseVisualStyleBackColor = true;
-            this.SignIn.Click += new System.EventHandler(this.SignIn_Click);
-            // 
             // Change
             // 
             this.Change.Location = new System.Drawing.Point(156, 0);
@@ -62,12 +52,23 @@
             this.Change.UseVisualStyleBackColor = true;
             this.Change.Click += new System.EventHandler(this.Change_Click);
             // 
+            // SignInButton
+            // 
+            this.SignInButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.SignInButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.SignInButton.Location = new System.Drawing.Point(75, 0);
+            this.SignInButton.Name = "SignInButton";
+            this.SignInButton.Size = new System.Drawing.Size(75, 23);
+            this.SignInButton.TabIndex = 3;
+            this.SignInButton.Text = "Not logged";
+            this.SignInButton.UseVisualStyleBackColor = false;
+            // 
             // MasterPassword
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.SignInButton);
             this.Controls.Add(this.Change);
-            this.Controls.Add(this.SignIn);
             this.Controls.Add(this.Label);
             this.Name = "MasterPassword";
             this.Size = new System.Drawing.Size(308, 25);
@@ -79,7 +80,7 @@
         #endregion
 
         private System.Windows.Forms.Label Label;
-        private System.Windows.Forms.Button SignIn;
         private System.Windows.Forms.Button Change;
+        private GuiParts.LogonManageButton SignInButton;
     }
 }

@@ -19,13 +19,10 @@ namespace PasswordManager.Master.Setting
         private IMainConfig config;
         public IMainConfig Config
         {
-            set {
+            set
+            {
                 config = value;
-                config.PasswordConfirmed += () =>
-                {
-                    SignIn.BackColor = CONFIRMED;
-                    SignIn.Text = "Logged";
-                };
+                SignInButton.JointToMainConfig(config);
             }
             get { return config; }
         }
@@ -33,9 +30,6 @@ namespace PasswordManager.Master.Setting
         public MasterPassword()
         {
             InitializeComponent();
-
-            SignIn.BackColor = NOT_CONFIRMED;
-            SignIn.Text = "Not logged";
         }
 
         private void SignIn_Click(object sender, EventArgs e)

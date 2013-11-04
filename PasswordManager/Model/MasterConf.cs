@@ -23,6 +23,7 @@ namespace PasswordManager.Master
         public static readonly Color DEFAULT_SHOW_BACK = Color.White;
 
         public event Action PasswordConfirmed = new Action(() => { });
+        public event Action PasswordLocked = new Action(() => { });
         public event Action ItemModified = new Action(() => { });
 
         private string name;
@@ -142,11 +143,21 @@ namespace PasswordManager.Master
         {
             set
             {
-                password = value;
-                hashedPass = PasswordFactory.ToHash(value, this);
-                IsPasswordConfirmed = true;
+                if (value == null)
+                {
+                    password = value;
+                    IsPasswordConfirmed = false;
 
-                PasswordConfirmed();
+                    PasswordLocked();
+                }
+                else
+                {
+                    password = value;
+                    hashedPass = PasswordFactory.ToHash(value, this);
+                    IsPasswordConfirmed = true;
+
+                    PasswordConfirmed();
+                }
             }
             get
             {

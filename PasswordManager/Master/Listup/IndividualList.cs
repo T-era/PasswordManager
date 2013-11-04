@@ -15,13 +15,16 @@ namespace PasswordManager.Master.Listup
 
     public partial class IndividualList : UserControl
     {
+        private readonly IDictionary<ItemPolicy, IndividualWindow> OpenedWindows = new Dictionary<ItemPolicy, IndividualWindow>();
         private IMainConfig config;
         public IMainConfig Config
         {
             set
             {
                 config = value;
+                SignInButton.JointToMainConfig(config);
                 this.ListView.DataSource = value.Items;
+                config.PasswordLocked += this.CloseAllWindow;
             }
             get { return config; }
         }
@@ -50,9 +53,10 @@ namespace PasswordManager.Master.Listup
 
         private void AddNew_Click(object sender, EventArgs e)
         {
-            AddNewItem(this.Config);
+            var newPolicy = AddNewItem(this.Config);
+            OpenWindow(newPolicy);
         }
-        internal static void AddNewItem(IMainConfig config)
+        internal static ItemPolicy AddNewItem(IMainConfig config)
         {
             using (var init = new PasswordManager.Individual.InitForm()
             {
@@ -68,13 +72,11 @@ namespace PasswordManager.Master.Listup
                     newPolicy.SaveToFile(config.DatFolder);
                     config.Items.Add(newPolicy);
 
-                    new IndividualWindow()
-                    {
-                        Name = init.ViewName,
-                        Text = init.ViewName,
-                        Config = config,
-                        Item = newPolicy,
-                    }.Show();
+                    return newPolicy;
+                }
+                else
+                {
+                    return null;
                 }
             }
         }
@@ -97,13 +99,34 @@ namespace PasswordManager.Master.Listup
                 }
                 item.ReadPassword(config.Password, config.DatFolder);
             }
-            new IndividualWindow()
+            OpenWindow(item);
+        }
+        private void OpenWindow(ItemPolicy item)
+        {
+            if (OpenedWindows.ContainsKey(item))
             {
-                Name = item.Name,
-                Text = item.Name,
-                Config = Config,
-                Item = item,
-            }.Show();
+                OpenedWindows[item].Focus();
+            }
+            else
+            {
+                var window = new IndividualWindow()
+                {
+                    Name = item.Name,
+                    Text = item.Name,
+                    Config = Config,
+                    Item = item,
+                };
+                OpenedWindows.Add(item, window);
+                window.Show();
+            }
+        }
+        private void CloseAllWindow()
+        {
+            foreach (var entry in OpenedWindows)
+            {
+                entry.Value.Close();
+            }
+            OpenedWindows.Clear();
         }
     }
 }

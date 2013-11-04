@@ -14,6 +14,7 @@ namespace PasswordManager.Model
     public interface IMainConfig : INotifyPropertyChanged
     {
         event Action PasswordConfirmed;
+        event Action PasswordLocked;
         event Action ItemModified;
 
         string ConfName { get; }

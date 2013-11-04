@@ -35,6 +35,7 @@
             this.backendBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.backend = new PasswordManager.Master.Listup.Backend();
             this.AddNew = new System.Windows.Forms.Button();
+            this.SignInButton = new PasswordManager.GuiParts.LogonManageButton();
             ((System.ComponentModel.ISupportInitialize)(this.ListView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backendBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backend)).BeginInit();
@@ -55,12 +56,12 @@
             this.limitDataGridViewTextBoxColumn});
             this.ListView.DataMember = "ListItems";
             this.ListView.DataSource = this.backendBindingSource;
-            this.ListView.Location = new System.Drawing.Point(0, 0);
+            this.ListView.Location = new System.Drawing.Point(0, 32);
             this.ListView.Name = "ListView";
             this.ListView.ReadOnly = true;
             this.ListView.RowTemplate.Height = 21;
             this.ListView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ListView.Size = new System.Drawing.Size(226, 135);
+            this.ListView.Size = new System.Drawing.Size(226, 103);
             this.ListView.TabIndex = 0;
             this.ListView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ListViewShowAlert);
             this.ListView.DoubleClick += new System.EventHandler(this.ListView_DoubleClick);
@@ -100,10 +101,21 @@
             this.AddNew.UseVisualStyleBackColor = true;
             this.AddNew.Click += new System.EventHandler(this.AddNew_Click);
             // 
+            // SignInButton
+            // 
+            this.SignInButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.SignInButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.SignInButton.Location = new System.Drawing.Point(3, 3);
+            this.SignInButton.Name = "SignInButton";
+            this.SignInButton.Size = new System.Drawing.Size(75, 23);
+            this.SignInButton.TabIndex = 2;
+            this.SignInButton.UseVisualStyleBackColor = false;
+            // 
             // IndividualList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.SignInButton);
             this.Controls.Add(this.AddNew);
             this.Controls.Add(this.ListView);
             this.Name = "IndividualList";
@@ -123,5 +135,6 @@
         private Backend backend;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn limitDataGridViewTextBoxColumn;
+        private GuiParts.LogonManageButton SignInButton;
     }
 }
