@@ -15,7 +15,7 @@ namespace PasswordManager.GuiParts
     {
         private static readonly Color NOT_CONFIRMED = Color.FromArgb(64, 255, 0, 0);
         private static readonly Color LOGGED = Color.FromArgb(64, 0, 0, 255);
-        private static readonly Color LOCKED = Color.FromArgb(64, 128, 0, 128);
+        private static readonly Color LOCKED = Color.FromArgb(128, 128, 0, 128);
         private bool logged = false;
         private bool locked = false;
         internal Func<bool> LogonAction { set; get; }

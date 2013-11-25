@@ -103,7 +103,8 @@ namespace PasswordManager.Master.Listup
         }
         private void OpenWindow(ItemPolicy item)
         {
-            if (OpenedWindows.ContainsKey(item))
+            if (OpenedWindows.ContainsKey(item)
+                && ! OpenedWindows[item].IsDisposed)
             {
                 OpenedWindows[item].Focus();
             }
@@ -116,7 +117,14 @@ namespace PasswordManager.Master.Listup
                     Config = Config,
                     Item = item,
                 };
-                OpenedWindows.Add(item, window);
+                if (OpenedWindows.ContainsKey(item))
+                {
+                    OpenedWindows[item] = window;
+                }
+                else
+                {
+                    OpenedWindows.Add(item, window);
+                }
                 window.Show();
             }
         }
