@@ -10,10 +10,10 @@ using System.Windows.Forms;
 namespace PasswordManager.MasterPassword
 {
     using PasswordManager.Model;
+    using System.IO;
 
     public partial class InitForm : Form
     {
-        const string CONF_FILE_PATH = "{0}\\{1}.ytel";
         private bool isAsAddNew;
         public bool IsAsAddNew
         {
@@ -33,7 +33,7 @@ namespace PasswordManager.MasterPassword
             }
             set {
                 ViewName.Text = value;
-                ViewMasterFile.Text = string.Format(CONF_FILE_PATH, confDir, value);
+                ViewMasterFile.Text = string.Format(Path.Combine(confDir, value + ".ytel"));
             }
         }
         public string Password { get { return InputPassword.Text; } }
@@ -49,7 +49,7 @@ namespace PasswordManager.MasterPassword
             private set
             {
                 confDir = value;
-                ViewMasterFile.Text = string.Format(CONF_FILE_PATH, value, ConfName);
+                ViewMasterFile.Text = string.Format(Path.Combine(value, ConfName + ".ytel"));
             }
             get { return confDir; }
         }
@@ -67,7 +67,7 @@ namespace PasswordManager.MasterPassword
             if (result == DialogResult.OK)
             {
                 ConfDir = rootFolderDialog.SelectedPath;
-                DataDir = confDir + "\\ytel";
+                DataDir = Path.Combine(confDir, "ytel");
             }
         }
 
@@ -101,7 +101,7 @@ namespace PasswordManager.MasterPassword
 
         private void ViewName_TextChanged(object sender, EventArgs e)
         {
-            ViewMasterFile.Text = string.Format(CONF_FILE_PATH, confDir, ViewName.Text);
+            ViewMasterFile.Text = string.Format(Path.Combine(confDir, ViewName.Text + ".ytel"));
         }
     }
 }

@@ -340,7 +340,7 @@ namespace PasswordManager.Model
         }
         public void ReadPassword(string masterPass, string datFolder)
         {
-            using (var input = File.OpenRead(datFolder + "\\" + Name + "\\password"))
+            using (var input = File.OpenRead(Path.Combine(datFolder, Name, "password")))
             {
                 password = PasswordFactory.FromCrypto(FileIo.ReadBytes(input), masterPass);
                 PropertyChangedEvent("Password");
@@ -349,7 +349,7 @@ namespace PasswordManager.Model
 
         private static FileStream MakeFileIfNotExists(string folder, string itemName, string fileName)
         {
-            string fullPath = folder + "\\" + itemName + "\\" + fileName;
+            string fullPath = Path.Combine(folder, itemName, fileName);
             if (File.Exists(fullPath))
             {
                 BackupFile(fullPath);
@@ -359,7 +359,7 @@ namespace PasswordManager.Model
         private static void BackupFile(string originPath)
         {
             FileInfo file = new FileInfo(originPath);
-            FileInfo dest = new FileInfo(file.DirectoryName + "\\_" + file.Name);
+            FileInfo dest = new FileInfo(Path.Combine(file.DirectoryName, "_" + file.Name));
             if (dest.Exists)
             {
                 BackupFile(dest.FullName);
@@ -396,7 +396,7 @@ namespace PasswordManager.Model
         }
         internal bool HasPasswordFile(string datFolder)
         {
-            return File.Exists(datFolder + "\\" + Name + "\\password");
+            return File.Exists(Path.Combine(datFolder, Name, "password"));
         }
         private void PropertyChangedEvent(string propertyName)
         {

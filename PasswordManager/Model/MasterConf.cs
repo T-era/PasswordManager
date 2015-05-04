@@ -176,7 +176,7 @@ namespace PasswordManager.Master
 
         public void SaveToFile()
         {
-            using (var os = File.OpenWrite(this.confFolderPath + "\\" + this.name + ".ytel"))
+            using (var os = File.OpenWrite(Path.Combine(this.confFolderPath, this.name + ".ytel")))
             {
                 FileIo.WriteUtf8Bytes(os, DatFolder);
                 FileIo.WriteUtf8Bytes(os, Remarks);
@@ -234,7 +234,7 @@ namespace PasswordManager.Master
             var childs = dir.GetDirectories();
             foreach (var child in childs)
             {
-                var newItem = ItemPolicy.LoadFromFile(child.FullName + "\\policy");
+                var newItem = ItemPolicy.LoadFromFile(Path.Combine(child.FullName, "policy"));
                 items.Add(newItem);
             }
         }

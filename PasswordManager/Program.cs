@@ -19,7 +19,7 @@ namespace PasswordManager
         [STAThread]
         static void Main(string[] args)
         {
-//args = new[] { @"C:\Users\22677478\Desktop\個人.ytel" };
+//args = new[] { @"C:\Users\Yoshi\Desktop\Private.ytel" };
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
