@@ -12,12 +12,13 @@ namespace PasswordManager.Master.Listup
     using PasswordManager.Individual;
     using PasswordManager.MasterPassword;
     using PasswordManager.Model;
+    using PasswordManagerLib;
 
     public partial class IndividualList : UserControl
     {
         private readonly IDictionary<ItemPolicy, IndividualWindow> OpenedWindows = new Dictionary<ItemPolicy, IndividualWindow>();
-        private IMainConfig config;
-        public IMainConfig Config
+        private Model.IMainConfig config;
+        public Model.IMainConfig Config
         {
             set
             {
@@ -56,7 +57,7 @@ namespace PasswordManager.Master.Listup
             var newPolicy = AddNewItem(this.Config);
             OpenWindow(newPolicy);
         }
-        internal static ItemPolicy AddNewItem(IMainConfig config)
+        internal static ItemPolicy AddNewItem(Model.IMainConfig config)
         {
             using (var init = new PasswordManager.Individual.InitForm()
             {

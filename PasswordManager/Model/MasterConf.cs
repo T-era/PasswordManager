@@ -12,8 +12,9 @@ namespace PasswordManager.Master
 
     using PasswordManager.Master.Listup;
     using PasswordManager.Model;
+    using PasswordManagerLib;
 
-    public partial class MainConfig : IMainConfig
+    public partial class MainConfig : Model.IMainConfig
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

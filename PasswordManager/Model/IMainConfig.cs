@@ -11,28 +11,8 @@ namespace PasswordManager.Model
 
     using PasswordManager.Master.Listup;
 
-    public interface IMainConfig : INotifyPropertyChanged
+    public interface IMainConfig : INotifyPropertyChanged, PasswordManagerLib.IMainConfig
     {
-        event Action PasswordConfirmed;
-        event Action PasswordLocked;
-        event Action ItemModified;
-
-        string ConfName { get; }
-        Color HideFore { set; get; }
-        Color HideBack { set; get; }
-        Color ShowFore { set; get; }
-        Color ShowBack { set; get; }
-        string DatFolder { set; get; }
-        string Remarks { set; get; }
-
-        byte[] HashedPass { set; get; }
-        bool IsPasswordConfirmed { get; }
-        string Password { set; get; }
-
-        void AddItem(ItemPolicy item);
-        IEnumerator<ItemPolicy> GetItems();
         BindingSource Items { get; }
-        void SaveToFile();
-        byte[] GetSalt();
     }
 }

@@ -11,20 +11,21 @@ namespace PasswordManager.Individual.Password
 {
     using PasswordManager.Model;
     using PasswordManager.MasterPassword;
+    using PasswordManagerLib;
 
     public partial class GeneratorWindow : Form
     {
         private ItemPolicy item;
-        private IMainConfig config;
+        private Model.IMainConfig config;
         public ItemPolicy Item { set { item = value; } }
-        public IMainConfig Config { set { config = value; } }
+        public Model.IMainConfig Config { set { config = value; } }
 
         public GeneratorWindow()
         {
             InitializeComponent();
         }
 
-        public void CreatePassword(ItemPolicy item, IMainConfig config)
+        public void CreatePassword(ItemPolicy item, Model.IMainConfig config)
         {
             this.item = item;
             this.config = config;

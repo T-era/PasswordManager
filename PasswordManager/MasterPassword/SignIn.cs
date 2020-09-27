@@ -10,10 +10,11 @@ using System.Windows.Forms;
 namespace PasswordManager.MasterPassword
 {
     using PasswordManager.Model;
+    using PasswordManagerLib;
 
     public partial class SignIn : Form
     {
-        public IMainConfig Config { set; get; }
+        public Model.IMainConfig Config { set; get; }
 
         public SignIn()
         {

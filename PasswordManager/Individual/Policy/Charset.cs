@@ -11,6 +11,7 @@ namespace PasswordManager.Individual.Policy
 {
     using PasswordManager.GuiParts.Utility;
     using PasswordManager.Model;
+    using PasswordManagerLib;
 
     public partial class Charset : UserControl
     {

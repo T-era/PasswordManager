@@ -11,6 +11,7 @@ namespace PasswordManager.Individual.Alter
 {
     using PasswordManager.Model;
     using PasswordManager.Individual.Password;
+    using PasswordManagerLib;
 
     public partial class SecretView : UserControl
     {
@@ -24,7 +25,7 @@ namespace PasswordManager.Individual.Alter
                 timestamp1.Item = value;
             }
         }
-        public IMainConfig Config { set; private get; }
+        public Model.IMainConfig Config { set; private get; }
 
         public Color PasswordHideFore { set { this.password1.HideFore = value; } }
         public Color PasswordHideBack { set { this.password1.HideBack = value; } }

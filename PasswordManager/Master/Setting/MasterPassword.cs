@@ -11,13 +11,14 @@ namespace PasswordManager.Master.Setting
 {
     using PasswordManager.Model;
     using PasswordManager.MasterPassword;
+    using PasswordManagerLib;
 
     public partial class MasterPassword : UserControl
     {
         private static readonly Color NOT_CONFIRMED = Color.FromArgb(64, 255, 0, 0);
         private static readonly Color CONFIRMED = Color.FromArgb(64, 0, 0, 255);
-        private IMainConfig config;
-        public IMainConfig Config
+        private Model.IMainConfig config;
+        public Model.IMainConfig Config
         {
             set
             {
@@ -45,7 +46,7 @@ namespace PasswordManager.Master.Setting
         {
             ChangePassword(this.Config);
         }
-        internal static void ChangePassword(IMainConfig config)
+        internal static void ChangePassword(Model.IMainConfig config)
         {
             if (!config.IsPasswordConfirmed)
             {

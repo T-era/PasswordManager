@@ -13,6 +13,7 @@ namespace PasswordManager.Individual
 
     using PasswordManager.Model;
     using PasswordManager.GuiParts.Utility;
+    using PasswordManagerLib;
 
     public partial class TargetSite : UserControl
     {

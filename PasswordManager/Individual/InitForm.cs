@@ -12,11 +12,13 @@ namespace PasswordManager.Individual
     using System.IO;
 
     using PasswordManager.Model;
+    using PasswordManagerLib;
 
     public partial class InitForm : Form
     {
-        private IMainConfig config;
-        public IMainConfig Config {
+        private Model.IMainConfig config;
+        public Model.IMainConfig Config
+        {
             set
             {
                 config = value;

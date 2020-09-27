@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PasswordManager.Model
+namespace PasswordManagerLib
 {
     using System.Security.Cryptography;
 
-    class PasswordFactory
+    public class PasswordFactory
     {
         private const string HASH_IV_SEED = "This is my IV seed.";
         private const int SALT_LENGTH = 8;
 
-        internal static byte[] ToHash(string password, IMainConfig config)
+        public static byte[] ToHash(string password, IMainConfig config)
         {
             byte[] passwordArray = ASCIIEncoding.ASCII.GetBytes(password);
             using (var encoder = SHA512.Create())
@@ -25,14 +25,14 @@ namespace PasswordManager.Model
                 return passwordArray;
             }
         }
-        internal static byte[] CreateNewSalt()
+        public static byte[] CreateNewSalt()
         {
             byte[] ret = new byte[SALT_LENGTH];
             new RNGCryptoServiceProvider().GetBytes(ret);
             return ret;
         }
 
-        internal static byte[] ToCrypto(string password, string masterPass)
+        public static byte[] ToCrypto(string password, string masterPass)
         {
             var crypt = GetCrypt(masterPass); 
             var encryptor = crypt.CreateEncryptor();
@@ -41,7 +41,7 @@ namespace PasswordManager.Model
             byte[] passByte = UTF8Encoding.UTF8.GetBytes(password);
             return encryptor.TransformFinalBlock(passByte, 0, passByte.Length);
         }
-        internal static string FromCrypto(byte[] crypto, string masterPass)
+        public static string FromCrypto(byte[] crypto, string masterPass)
         {
             var crypt = GetCrypt(masterPass);
             var decryptor = crypt.CreateDecryptor();

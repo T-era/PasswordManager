@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PasswordManager.Model
+namespace PasswordManagerLib
 {
     using System.ComponentModel;
     using System.IO;
@@ -12,20 +12,20 @@ namespace PasswordManager.Model
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        internal readonly static char[] CHARS_SIGNS = new [] {
-            ' ', '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/',
-            ':', ';', '<', '=', '>', '?', '@','[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'
+        public readonly static char[] CHARS_SIGNS = new[] {
+            '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/',
+            ':', ';', '<', '=', '>', '?', '@','[', ']', '^', '_', '`', '{', '|', '}', '~'
         };
-        internal readonly static char[] CHARS_NUMBERS = new [] {
+        public readonly static char[] CHARS_NUMBERS = new[] {
             '0', '1', '2','3','4','5','6','7','8','9',
         };
-        internal readonly static char[] CHARS_LOWER = new [] {
+        public readonly static char[] CHARS_LOWER = new[] {
             'a', 'b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
         };
-        internal readonly static char[] CHARS_UPPER = new[] {
+        public readonly static char[] CHARS_UPPER = new[] {
             'A', 'B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
         };
-        internal readonly static IList<char> CHARS_ALL;
+        public readonly static IList<char> CHARS_ALL;
         static ItemPolicy()
         {
             CHARS_ALL = new List<char>();
@@ -213,7 +213,7 @@ namespace PasswordManager.Model
         /// <summary>
         /// このプロパティはグループ別のまとめ指定も反映。
         /// </summary>
-        internal IList<char> UsableChars
+        public IList<char> UsableChars
         {
             get {
                 return usableChars
@@ -366,21 +366,21 @@ namespace PasswordManager.Model
             }
             File.Move(file.FullName, dest.FullName);
         }
-        internal void AddAllUsableChars(char[] chars)
+        public void AddAllUsableChars(char[] chars)
         {
             foreach (char c in chars)
             {
                 usableChars.Add(c);
             }
         }
-        internal void RemoveAllUsableChars(char[] chars)
+        public void RemoveAllUsableChars(char[] chars)
         {
             foreach (char c in chars)
             {
                 usableChars.Remove(c);
             }
         }
-        internal TimeSpan LimitSpan()
+        public TimeSpan LimitSpan()
         {
             switch (TermUnit)
             {
@@ -394,7 +394,7 @@ namespace PasswordManager.Model
                     throw new Exception();
             }
         }
-        internal bool HasPasswordFile(string datFolder)
+        public bool HasPasswordFile(string datFolder)
         {
             return File.Exists(Path.Combine(datFolder, Name, "password"));
         }

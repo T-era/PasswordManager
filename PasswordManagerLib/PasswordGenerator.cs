@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PasswordManager.Model
+namespace PasswordManagerLib
 {
     using System.Security.Cryptography;
 
-    class PasswordGenerator
+    public class PasswordGenerator
     {
         private readonly ItemPolicy item;
         private readonly byte charValiation;
@@ -16,13 +16,13 @@ namespace PasswordManager.Model
         /// </summary>
         private readonly RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
 
-        internal PasswordGenerator(ItemPolicy item)
+        public PasswordGenerator(ItemPolicy item)
         {
             this.item = item;
             this.charValiation = (byte)item.UsableChars.Count;// ASCII なので、高々byte
         }
 
-        internal string Generate()
+        public string Generate()
         {
             int length = DecideLength();
             char[] chars = new char[length];

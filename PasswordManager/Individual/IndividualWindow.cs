@@ -11,6 +11,7 @@ namespace PasswordManager.Individual
 {
     using PasswordManager.GuiParts.Utility;
     using PasswordManager.Model;
+    using PasswordManagerLib;
 
     public partial class IndividualWindow : Form
     {
@@ -24,7 +25,7 @@ namespace PasswordManager.Individual
                 this.Remarks.DataBindings.Add(new Binding("Text", value, "Remarks"));
             }
         }
-        public IMainConfig Config
+        public Model.IMainConfig Config
         {
             set
             {

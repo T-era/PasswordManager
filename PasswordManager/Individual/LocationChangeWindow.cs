@@ -10,6 +10,7 @@ using System.Windows.Forms;
 namespace PasswordManager.Individual
 {
     using PasswordManager.Model;
+    using PasswordManagerLib;
 
     public partial class LocationChangeWindow : Form
     {
